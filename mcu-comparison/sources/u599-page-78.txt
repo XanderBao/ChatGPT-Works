@@ -1,0 +1,51 @@
+Functional overview                                                                    STM32U59xxx
+
+
+           •   Up to eight capacitive sensing channels can be acquired in parallel offering a very good
+               response time
+           •   Spread spectrum feature to improve system robustness in noisy environments
+           •   Full hardware management of the charge transfer acquisition sequence
+           •   Programmable charge transfer frequency
+           •   Programmable sampling capacitor I/O pin
+           •   Programmable channel I/O pin
+           •   Programmable max count value to avoid long acquisition when a channel is faulty
+           •   Dedicated end of acquisition and max count error flags with interrupt capability
+           •   One sampling capacitor for up to three capacitive sensing channels to reduce the
+               system components
+           •   Compatible with proximity, touchkey, linear and rotary touch sensor implementation
+           •   Designed to operate with STMTouch touch sensing firmware library
+Note:      The number of capacitive sensing channels is dependent on the size of the packages and
+           subject to I/O availability.
+
+
+3.42       True random number generator (RNG)
+           The RNG is a true random number generator that provides full entropy outputs to the
+           application as 32-bit samples. It is composed of a live entropy source (analog) and
+           an internal conditioning component.
+           The RNG is a NIST SP 800-90B compliant entropy source that can be used to construct
+           a non-deterministic random bit generator (NDRBG).
+           The true random generator:
+           •   delivers 32-bit true random numbers, produced by an analog entropy source
+               conditioned by a NIST SP800-90B approved conditioning stage
+           •   can be used as entropy source to construct a non-deterministic random bit generator
+               (NDRBG)
+           •   produces four 32-bit random samples every 412 AHB clock cycles if fAHB < 77 MHz
+               (256 RNG clock cycles otherwise)
+           •   embeds startup and NIST SP800-90B approved continuous health tests (repetition
+               count and adaptive proportion tests), associated with specific error management
+           •   can be disabled to reduce power consumption, or enabled with an automatic low-power
+               mode (default configuration)
+           •   has an AMBA AHB slave peripheral, accessible through 32-bit word single accesses
+               only (else an AHB bus error is generated, and the write accesses are ignored)
+
+
+3.43       HASH hardware accelerator (HASH)
+           The HASH is a fully compliant implementation of the secure hash algorithm
+           (SHA-1, SHA-224, SHA-256), the MD5 (message-digest algorithm 5) hash algorithm and
+           the HMAC (keyed-hash message authentication code) algorithm. HMAC is suitable for
+           applications requiring message authentication.
+
+
+
+
+78/385                                    DS13633 Rev 3

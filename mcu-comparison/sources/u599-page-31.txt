@@ -1,0 +1,51 @@
+STM32U59xxx                                                                    Functional overview
+
+
+              –    Cortex-M33 is in secure state after reset. The boot address must be in secure
+                   address.
+         •    Memory map:
+              –    SAU is fully secure after reset. Consequently, all memory map is fully secure.
+                   Up to eight SAU configurable regions are available for security attribution.
+         •    Flash memory:
+              –    Flash memory security area is defined by watermark user options.
+              –    Flash memory block based area is nonsecure after reset.
+         •    SRAMs:
+              –    All SRAMs are secure after reset. MPCBB (memory protection block based
+                   controller) is secure.
+         •    External memories:
+              –    FSMC, OCTOSPI banks are secure after reset. MPCWMx (memory protection
+                   watermark based controller) is secure.
+         •    Peripherals
+              –    Securable peripherals are nonsecure after reset.
+              –    TrustZone-aware peripherals are nonsecure after reset. Their secure configuration
+                   registers are secure.
+         •    All GPIOs are secure after reset.
+         •    Interrupts:
+              –    NVIC: All interrupts are secure after reset. NVIC is banked for secure and
+                   nonsecure state.
+         •    TZIC: All illegal access interrupts are disabled after reset.
+
+
+3.7      Boot modes
+         At startup, a BOOT0 pin, nBOOT0, NSBOOTADDx[24:0] (x = 0,1) and
+         SECBOOTADD0[24:0] option bytes are used to select the boot memory address that
+         includes:
+         •    Boot from any address in user flash memory.
+         •    Boot from system memory bootloader.
+         •    Boot from any address in embedded SRAM.
+         •    Boot from RSS (root security services).
+         The BOOT0 value comes from the PH3-BOOT0 pin or from an option bit depending on the
+         value of a user option bit to free the GPIO pad if needed.
+         The bootloader is located in the system memory, programmed by ST during production.
+         The bootloader is used to reprogram the flash memory by using USART, I2C, SPI, FDCAN
+         or USB OTG_HS in device mode through the DFU (device firmware upgrade).
+         The bootloader is available on all devices. Refer to the application note
+         STM32 microcontroller system memory boot mode (AN2606) for more details.
+         The RSS are embedded in a flash memory area named secure information block,
+         programmed during ST production.
+         For example, the RSS enable the SFI (secure firmware installation), thanks to the RSSe SFI
+         (RSS extension firmware).
+
+
+                                           DS13633 Rev 3                                        31/385
+                                                                                                         95

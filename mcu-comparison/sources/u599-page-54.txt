@@ -1,0 +1,52 @@
+Functional overview                                                                        STM32U59xxx
+
+
+           •   Transfers arbitration based on a four-grade programmed priority at a channel level:
+               –      One high-priority traffic class, for time-sensitive channels (queue 3)
+               –      Three low-priority traffic classes, with a weighted round-robin allocation for non
+                      time-sensitive channels (queues 0, 1, 2)
+           •   Per channel event generation, on any of the following events: transfer complete or half
+               transfer complete or data transfer error or user setting error, and/or update linked-list
+               item error or completed suspension
+           •   Per channel interrupt generation, with separately programmed interrupt enable
+               per event
+           •   16 concurrent DMA channels:
+               –      Per channel FIFO for queuing source and destination transfers
+               –      Intra-channel DMA transfers chaining via programmable linked-list into memory,
+                      supporting two execution modes: run-to-completion and link step mode
+               –      Intra-channel and inter-channel DMA transfers chaining via programmable DMA
+                      input triggers connection to DMA task completion events
+           •   Per linked-list item within a channel:
+               –      Separately programmed source and destination transfers
+               –      Programmable data handling between source and destination: byte-based
+                      reordering, packing or unpacking, padding or truncation, sign extension and
+                      left/right realignment
+               –      Programmable number of data bytes to be transferred from the source, defining
+                      the block level
+               –      12 channels with linear source and destination addressing: either fixed or
+                      contiguously incremented addressing, programmed at a block level, between
+                      successive single transfers
+               –      Four channels with 2D source and destination addressing: programmable signed
+                      address offsets between successive burst transfers (non-contiguous addressing
+                      within a block, combined with programmable signed address offsets between
+                      successive blocks, at a second 2D/repeated block level)
+               –      Support for scatter-gather (multi-buffer transfers), data interleaving and
+                      deinterleaving via 2D addressing
+               –      Programmable DMA request and trigger selection
+               –      Programmable DMA half-transfer and transfer complete events generation
+               –      Pointer to the next linked-list item and its data structure in memory, with automatic
+                      update of the DMA linked-list control registers
+           •   Debug:
+               –      Channel suspend and resume support
+               –      Channel status reporting including FIFO level and event flags
+           •   TrustZone support:
+               –      Support for secure and nonsecure DMA transfers, independently at a first channel
+                      level, and independently at a source/destination and link sub-levels
+               –      Secure and nonsecure interrupts reporting, resulting from any of the respectively
+                      secure and nonsecure channels
+               –      TrustZone-aware AHB slave port, protecting any DMA secure resource (register,
+                      register field) from a nonsecure access
+
+
+
+54/385                                       DS13633 Rev 3

@@ -1,0 +1,51 @@
+STM32U59xxx                                                                            Functional overview
+
+
+             •    TrustZone support:
+                  –     Tamper secure or nonsecure configuration
+                  –     Backup registers configuration in 3 configurable-size areas:
+                        - 1 read/write secure area
+                        - 1 write secure/read nonsecure area
+                        - 1 read/write nonsecure area
+             •    Tamper configuration and backup registers privilege protection
+             •    Monotonic counter
+
+
+3.46         Inter-integrated circuit interface (I2C)
+             The device embeds six I2C. Refer to Table 20 for the features implementation.
+             The I2C bus interface handles communications between the microcontroller and the serial
+             I2C bus. It controls all I2C bus-specific sequencing, protocol, arbitration and timing.
+             The I2C peripheral supports:
+             •    I2C-bus specification and user manual rev. 5 compatibility:
+                  –     Slave and Master modes, multimaster capability
+                  –     Standard-mode (Sm), with a bit rate up to 100 Kbit/s
+                  –     Fast-mode (Fm), with a bit rate up to 400 Kbit/s
+                  –     Fast-mode Plus (Fm+), with a bit rate up to 1 Mbit/s and 20 mA output drive I/Os
+                  –     7-bit and 10-bit addressing mode, multiple 7-bit slave addresses
+                  –     Programmable setup and hold times
+                  –     Optional clock stretching
+             •    System management bus (SMBus) specification rev 3.0 compatibility:
+                  –     Hardware PEC (packet error checking) generation and verification with
+                        ACK control
+                  –     Address resolution protocol (ARP) support
+                  –     SMBus alert
+             •    Power system management protocol (PMBus) specification rev 1.3 compatibility
+             •    Independent clock: a choice of independent clock sources allowing the I2C
+                  communication speed to be independent from the PCLK reprogramming
+             •    Autonomous functionality in Stop modes with wake-up from Stop capability
+             •    Programmable analog and digital noise filters
+             •    1-byte buffer with DMA capability
+
+                                         Table 20. I2C implementation
+                       I2C features(1)                         I2C1   I2C2   I2C3      I2C4   I2C5   I2C6
+
+Standard-mode (up to 100 Kbit/s)                                X       X       X       X      X      X
+Fast-mode (up to 400 Kbit/s)                                    X       X       X       X      X      X
+Fast-mode Plus with 20 mA output drive I/Os (up to 1 Mbit/s)    X       X       X       X      X      X
+Programmable analog and digital noise filters                   X       X       X       X      X      X
+
+
+
+
+                                                DS13633 Rev 3                                        85/385
+                                                                                                              95

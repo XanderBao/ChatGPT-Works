@@ -1,0 +1,51 @@
+Functional overview                                                                      STM32U59xxx
+
+
+           All RTC events (alarm, wake-up timer, timestamp) can generate an interrupt and wake up
+           the device from the low-power modes.
+
+3.45.2     Tamper and backup registers (TAMP)
+           The anti-tamper detection circuit is used to protect sensitive data from external attacks. 32
+           32-bit backup registers are retained in all low-power modes and also in VBAT mode. The
+           backup registers, as well as other secrets in the device, are protected by this anti-tamper
+           detection circuit with eight tamper pins and eleven internal tampers. The external tamper
+           pins can be configured for edge detection, or level detection with or without filtering, or
+           active tamper that increases the security level by auto checking that the tamper pins are not
+           externally opened or shorted.
+           TAMP main features:
+           •   A tamper detection can erase the backup registers, backup SRAM, SRAM2, caches,
+               and HASH peripheral.
+           •   32 32-bit backup registers:
+               –      The backup registers (TAMP_BKPxR) are implemented in the Backup domain that
+                      remains powered-on by VBAT when the VDD power is switched off.
+           •   Up to 8 tamper pins for 8 external tamper detection events:
+               –      Active tamper mode: continuous comparison between tamper output and input to
+                      protect from physical open-short attacks
+               –      Flexible active tamper I/O management: from 4 meshes (each input associated to
+                      its own exclusive output) to 7 meshes (single output shared for up to 7 tamper
+                      inputs)
+               –      Passive tampers: ultra-low power edge or level detection with internal pull-up
+                      hardware management
+               –      Configurable digital filter
+           •   11 internal tamper events to protect against transient or environmental perturbation
+               attacks:
+               –      Backup domain voltage monitoring
+               –      Temperature monitoring
+               –      LSE monitoring
+               –      RTC calendar overflow
+               –      JTAG/SWD access if RDP different from 0
+               –      Monotonic counter overflow
+               –      RNG fault
+               –      Independent watchdog reset when tamper flag is already set
+               –      3 ADC4 watchdogs
+           •   Each tamper can be configured in two modes:
+               –      Hardware mode: immediate erase of secrets on tamper detection, including
+                      backup registers erase
+               –      Software mode: erase of secrets following a tamper detection launched by
+                      software
+           •   Any tamper detection can generate a RTC time stamp event.
+
+
+
+
+84/385                                         DS13633 Rev 3

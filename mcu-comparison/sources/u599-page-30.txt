@@ -1,0 +1,68 @@
+Functional overview                                                                            STM32U59xxx
+
+
+              Based on IDAU security attribution, the flash memory, system SRAM and peripheral
+              memory space is aliased twice for secure and nonsecure states. However, the external
+              memory space is not aliased.
+              The table below shows an example of typical SAU region configuration based on IDAU
+              regions. The user can split and choose the secure, nonsecure or NSC regions for external
+              memories as needed.
+     Table 5. Example of memory map security attribution versus SAU configuration regions
+                                                                     SAU security
+           Region                              IDAU security                                  Final security
+                               Address range                      attribution typical
+         description                             attribution                                    attribution
+                                                                    configuration
+
+                               0x0000 0000                           Secure or               Secure or
+Code - external memories                         Nonsecure
+                               0x07FF FFFF                       nonsecure or NSC(1)     nonsecure or NSC
+
+                               0x0800 0000
+                                                 Nonsecure            Nonsecure                Nonsecure
+                               0x0BFF FFFF
+Code - Flash and SRAM
+                               0x0C00 0000
+                                                   NSC               Secure or NSC        Secure or NSC
+                               0x0FFF FFFF
+                               0x1000 0000
+                               0x17FF FFFF
+Code - external memories                         Nonsecure
+                               0x1800 0000
+                                                                                  Nonsecure
+                               0x1FFF FFFF
+                               0x2000 0000
+                                                 Nonsecure
+                               0x2FFF FFFF
+SRAM
+                               0x3000 0000
+                                                   NSC               Secure or NSC        Secure or NSC
+                               0x3FFF FFFF
+                               0x4000 0000
+                                                 Nonsecure            Nonsecure                Nonsecure
+                               0x4FFF FFFF
+Peripherals
+                               0x5000 0000
+                                                   NSC               Secure or NSC        Secure or NSC
+                               0x5FFF FFFF
+                               0x6000 0000                            Secure or              Secure or
+External memories                                Nonsecure
+                               0xDFFF FFFF                        nonsecure or NSC       nonsecure or NSC
+
+1. NSC = nonsecure callable.
+
+
+3.6.1         TrustZone peripheral classification
+              When the TrustZone security is active, a peripheral can be either securable or
+              TrustZone-aware type as follows:
+              •     securable: peripheral protected by an AHB/APB firewall gate that is controlled from
+                    TZSC to define security properties
+              •     TrustZone-aware: peripheral connected directly to AHB or APB bus and implementing
+                    a specific TrustZone behavior such as a subset of registers being secure
+
+3.6.2         Default TrustZone security state
+              The default system security state is detailed below:
+              •     CPU:
+
+
+30/385                                         DS13633 Rev 3

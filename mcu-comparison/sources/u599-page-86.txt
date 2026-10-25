@@ -1,0 +1,50 @@
+Functional overview                                                                                    STM32U59xxx
+
+
+                                    Table 20. I2C implementation (continued)
+                           I2C features(1)                       I2C1        I2C2   I2C3        I2C4   I2C5        I2C6
+
+SMBus/PMBus hardware support                                        X          X     X            X     X            X
+Independent clock                                                   X          X     X            X     X            X
+Autonomous in Stop 0, Stop 1 mode with wake-up capability           X          X     X            X     X            X
+Autonomous in Stop 2 mode with wake-up capability                   -          -     X            -      -           -
+1. X: supported
+
+
+
+3.47          Universal synchronous/asynchronous receiver transmitter
+              (USART/UART)
+              and low-power universal asynchronous receiver transmitter
+              (LPUART)
+              The devices embed four universal synchronous receiver transmitters (USART1, USART2,
+              USART3 and USART6), two universal asynchronous receiver transmitters (UART4, UART5)
+              and one low-power universal asynchronous receiver transmitter (LPUART1).
+
+                                        Table 21. USART, UART and LPUART features
+                             USART modes/features(1)             USART1/2/3/6         UART4/5            LPUART1
+
+                  Hardware flow control for modem                        X                  X                  X
+                  Continuous communication using DMA                     X                  X                  X
+                  Multiprocessor communication                           X                  X                  X
+                  Synchronous mode (master/slave)                        X                  -                  -
+                  Smartcard mode                                         X                  -                  -
+                  Single-wire half-duplex communication                  X                  X                  X
+                  IrDA SIR ENDEC block                                   X                  X                  -
+                  LIN mode                                               X                  X                  -
+                  Dual-clock domain and wake-up from Stop mode          X(2)               X(2)               X(3)
+                  Receiver timeout interrupt                             X                  X                  -
+                  Modbus communication                                   X                  X                  -
+                  Auto-baud rate detection                               X                  X                  -
+                  Driver enable                                          X                  X                  X
+                  USART data length                                                 7, 8 and 9 bits
+                  Tx/Rx FIFO                                             X                  X                  X
+                  Tx/Rx FIFO size                                                        8 bytes
+                  Autonomous mode                                        X                  X                  X
+              1. X = supported.
+              2. Wake-up supported from Stop 0 and Stop 1 modes.
+              3. Wake-up supported from Stop 0, Stop 1 and Stop 2 modes.
+
+
+
+
+86/385                                              DS13633 Rev 3

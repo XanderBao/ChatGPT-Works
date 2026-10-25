@@ -1,0 +1,51 @@
+STM32U59xxx                                                                    Functional overview
+
+
+         •    Supported cache accesses:
+              –   Both write-back and write-through policies supported (selectable with AHB
+                  bufferable attribute)
+              –   Read and write-back always allocated
+              –   Write-through always non-allocated (write-around)
+              –   Byte, half-word and word writes supported
+         •    TrustZone security support
+         •    Maintenance operations for software management of cache coherency:
+              –   Full cache invalidation (non interruptible)
+              –   Address range clean and/or invalidate operations (background task, interruptible)
+         •    Error management: detection of error for master port request initiated by DCACHE (line
+              eviction or clean operation), with optional interrupt raising
+
+
+3.3      Memory protection unit
+         The MPU (memory protection unit) is used to manage the CPU accesses to the memory
+         and to prevent one task to accidentally corrupt the memory or the resources used by any
+         other active task. This memory area is organized into up to 16 protected areas.
+         The MPU regions and registers are banked across secure and nonsecure states.
+         The MPU is especially helpful for applications where some critical or certified code must be
+         protected against the misbehavior of other tasks. It is usually managed by a RTOS
+         (real-time operating system).
+         If a program accesses a memory location that is prohibited by the MPU, the RTOS can
+         detect it and take action. In a RTOS environment, the kernel can dynamically update the
+         MPU area setting based on the process to be executed.
+         The MPU is optional and can be bypassed for applications that do not need it.
+
+
+3.4      Embedded flash memory
+         The devices feature up to 4 Mbytes of embedded flash memory that is available for storing
+         programs and data. The flash memory supports 10 000 cycles and up to 100 000 cycles
+         on 512 Kbytes. A 128-bit instruction prefetch is implemented and can optionally be enabled.
+         The flash memory interface features:
+         •    Dual-bank operating modes
+         •    Read-while-write (RWW)
+         This allows a read operation to be performed from one bank while an erase or program
+         operation is performed to the other bank. The dual-bank boot is also supported. Each bank
+         contains 256 pages of 8 Kbytes. The flash memory also embeds 512-byte OTP (one-time
+         programmable) for user data.
+         The whole non-volatile memory embeds the ECC (error correction code) feature supporting:
+         •    single-error detection and correction
+         •    double-error detection
+         •    ECC fail address report
+
+
+
+                                           DS13633 Rev 3                                       25/385
+                                                                                                        95

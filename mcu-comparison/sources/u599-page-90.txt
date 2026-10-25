@@ -1,0 +1,56 @@
+Functional overview                                                                           STM32U59xxx
+
+
+           •   SPI Motorola® and Texas Instruments® formats support
+           •   Hardware CRC feature can secure communication at the end of transaction by:
+               –       Adding CRC value in Tx mode
+               –       Automatic CRC error checking for Rx mode
+           •   Error detection with interrupt capability in case of data overrun, CRC error, data
+               underrun at slave, mode fault at master
+           •   Two 16x or 8x 8-bit embedded Rx and TxFIFOs with DMA capability
+           •   Programmable number of data in transaction
+           •   Configurable FIFO thresholds (data packing)
+           •   Configurable behavior at slave underrun condition (support of cascaded circular
+               buffers)
+           •   Autonomous functionality in Stop modes (handling of the transaction flow and required
+               clock distribution) with wake-up from stop capability
+           •   Optional status pin RDY signalizing the slave device ready to handle the data flow.
+
+                                               Table 22. SPI features
+                                                          SPI1, SPI2                         SPI3
+                         SPI feature
+                                                (full feature set instances)    (limited feature set instance)
+
+           Data size                            Configurable from 4 to 32-bit              8/16-bit
+                                                  CRC polynomial length            CRC polynomial length
+           CRC computation
+                                                configurable from 5 to 33-bit    configurable from 9 to 17-bit
+           Size of FIFOs                                  16x 8-bit                        8x 8-bit
+           Number of transfered data               Unlimited, expandable         Up to 1024, no data counter
+           Autonomous in Stop 0, Stop 1 mode
+                                                            Yes                              Yes
+           with wake-up capability
+           Autonomous in Stop 2 mode with
+                                                             No                              Yes
+           wake-up capability
+
+
+
+3.49       Serial audio interfaces (SAI)
+           The devices embed two SAI. Refer to Table 23: SAI implementation for the features
+           implementation. The SAI bus interface handles communications between the
+           microcontroller and the serial audio protocol.
+           The SAI peripheral supports:
+           •   Two independent audio sub-blocks that can be transmitters or receivers with their
+               respective FIFO
+           •   8-word integrated FIFOs for each audio sub-block
+           •   Synchronous or Asynchronous mode between the audio sub-blocks
+           •   Master or slave configuration independent for both audio sub-blocks
+           •   Clock generator for each audio block to target independent audio frequency sampling
+               when both audio sub-blocks are configured in master mode
+           •   Data size configurable: 8-, 10-, 16-, 20-, 24-, 32-bit
+
+
+
+
+90/385                                      DS13633 Rev 3

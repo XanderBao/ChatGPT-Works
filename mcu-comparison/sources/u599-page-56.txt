@@ -1,0 +1,45 @@
+Functional overview                                                                        STM32U59xxx
+
+
+           •   Per channel event generation, on any of the following events: transfer complete, or
+               half-transfer complete, or data transfer error, or user setting error, and/or update
+               linked-list item error, or completed suspension
+           •   Per channel interrupt generation, with separately programmed interrupt enable
+               per event
+           •   Four concurrent DMA channels:
+               –      Intra-channel DMA transfers chaining via programmable linked-list into memory,
+                      supporting two execution modes: run-to-completion and link step mode
+               –      Intra-channel and inter-channel DMA transfers chaining via programmable DMA
+                      input triggers connection to DMA task completion events
+           •   Per linked-list item within a channel:
+               –      Separately programmed source and destination transfers
+               –      Programmable data handling between source and destination: byte-based
+                      padding or truncation, sign extension and left/right realignment
+               –      Programmable number of data bytes to be transferred from the source, defining
+                      the block level
+               –      Linear source and destination addressing: either fixed or contiguously
+                      incremented addressing, programmed at a block level, between successive
+                      single transfers
+               –      Programmable DMA request and trigger selection
+               –      Programmable DMA half-transfer and transfer complete events generation
+               –      Pointer to the next linked-list item and its data structure in memory, with automatic
+                      update of the DMA linked-list control registers
+           •   Debug:
+               –      Channel suspend and resume support
+               –      Channel status reporting and event flags
+           •   TrustZone support
+               –      Support for secure and nonsecure DMA transfers, independently at a first channel
+                      level, and independently at a source/destination and link sub-levels
+               –      Secure and nonsecure interrupts reporting, resulting from any of the respectively
+                      secure and nonsecure channels
+               –      TrustZone-aware AHB slave port, protecting any DMA secure resource (register,
+                      register field) from a nonsecure access
+           •   Privileged/unprivileged support:
+               –      Support for privileged and unprivileged DMA transfers, independently at
+                      channel level
+               –      Privileged-aware AHB slave port.
+
+
+
+
+56/385                                       DS13633 Rev 3

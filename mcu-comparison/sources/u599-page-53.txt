@@ -1,0 +1,51 @@
+STM32U59xxx                                                                    Functional overview
+
+
+3.14.1   LPGPIO TrustZone security
+         Each I/O pin registers bit of the LPGPIO is configured as secure if the corresponding I/O is
+         configured as secure in the GPIO.
+
+
+3.15     Multi-AHB bus matrix
+         A 32-bit multi-AHB bus matrix interconnects all the master (CPU, DMA2D, GFXMMU,
+         GPDMA1, GPU2D, LTDC, OTG_HS, SDMMC1, SDMMC2) and the slave (flash memory,
+         FMC, HSPI, OCTOSPIs, SRAMs, AHB and APB) peripherals. It also ensures a seamless
+         and efficient operation even when several high-speed peripherals work simultaneously.
+         Another multi-AHB bus matrix interconnects two masters (previous AHB bus matrix slave
+         port and LPDMA1) and all slaves that are functional in Stop 2 modes (SRAM4 and
+         AHB/APB peripherals functional in Stop 2 mode).
+
+
+3.16     System configuration controller (SYSCFG)
+         The STM32U59xxx devices feature a set of configuration registers. The main purposes of
+         the system configuration controller are the following:
+         •    Managing robustness feature
+         •    Configuring FPU interrupts
+         •    Enabling/disabling the FMP high-drive mode of some I/Os and voltage booster for I/Os
+              analog switches
+         •    Managing the I/O compensation cell
+         •    Configuring register security access
+         •    Configuring the OTG_HS PHY
+         •    Adjust the HSPI supply capacitance
+         •    Disable internal SRAMs cacheability by DCACHE2
+
+
+3.17     General purpose direct memory access controller (GPDMA)
+         The general purpose direct memory access (GPDMA) controller is a bus master and system
+         peripheral.
+         The GPDMA is used to perform programmable data transfers between memory-mapped
+         peripherals and/or memories via linked-lists, upon the control of an off-loaded CPU.
+         The GPDMA main features are:
+         •    Dual bidirectional AHB master
+         •    Memory-mapped data transfers from a source to a destination:
+              –   Peripheral-to-memory
+              –   Memory-to-peripheral
+              –   Memory-to-memory
+              –   Peripheral-to-peripheral
+         •    Autonomous data transfers during Sleep and Stop modes
+
+
+
+
+                                           DS13633 Rev 3                                       53/385
+                                                                                                        95

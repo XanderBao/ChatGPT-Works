@@ -1,0 +1,56 @@
+STM32U59xxx                                                                           Functional overview
+
+
+         •      Privileged/unprivileged support:
+                –     Support for privileged and unprivileged DMA transfers, independently at
+                      channel level
+                –     Privileged-aware AHB slave port.
+
+                             Table 11. GPDMA1 channels implementation and usage
+                             Hardware parameters
+             Channel x                                                     Features
+                           dma_fifo_    dma_
+                            size[x]  addressing[x]
+
+                                                      Channel x (x = 0 to 11) is implemented with:
+                                                      – a FIFO of 8 bytes, 2 words
+             x = 0 to 11      2             0         – fixed/contiguously incremented addressing
+                                                      These channels may be also used for GPDMA transfers,
+                                                      between an APB or AHB peripheral and SRAM.
+                                                      Channel x (x = 12 to 15) is implemented with:
+                                                      – a FIFO of 32 bytes, 8 words
+         x = 12 to 15         4             1         – 2D addressing
+                                                      These channels may be also used for GPDMA transfers,
+                                                      between a demanding AHB peripheral and SRAM, or for
+                                                      transfers from/to external memories.
+
+
+                    Table 12. GPDMA1 autonomous mode and wake-up in low-power modes
+                                  Feature                                 Low-power modes
+
+         Autonomous mode and wake-up                        GPDMA1 in Sleep, Stop 0 and Stop 1 modes
+
+
+
+3.18     Low-power direct memory access controller (LPDMA)
+         The LPDMA controller is a bus master and system peripheral. The LPDMA is used to
+         perform programmable data transfers between memory-mapped peripherals and/or
+         memories via linked-lists, upon the control of an off-loaded CPU.
+         The LPDMA main features are:
+         •      Single bidirectional AHB master
+         •      Memory-mapped data transfers from a source to a destination:
+                –     Peripheral-to-memory
+                –     Memory-to-peripheral
+                –     Memory-to-memory
+                –     Peripheral-to-peripheral
+         •      Autonomous data transfers during Sleep and Stop modes
+         •      Transfers arbitration based on a 4-grade programmed priority at channel level:
+                –     One high-priority traffic class, for time-sensitive channels (queue 3)
+                –     Three low-priority traffic classes, with a weighted round-robin allocation for non
+                      time-sensitive channels (queues 0, 1, 2)
+
+
+
+
+                                                DS13633 Rev 3                                       55/385
+                                                                                                             95

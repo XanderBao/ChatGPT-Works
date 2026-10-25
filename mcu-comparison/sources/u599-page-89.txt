@@ -1,0 +1,51 @@
+STM32U59xxx                                                                           Functional overview
+
+
+              –    Transmit buffer empty
+              –    Busy and end of transmission flags
+         •    Parity control:
+              –    Transmits parity bit
+              –    Checks parity of received data byte
+         •    Four error detection flags:
+              –    Overrun error
+              –    Noise detection
+              –    Frame error
+              –    Parity error
+         •    Interrupt sources with flags
+         •    Multiprocessor communications: wake-up from Mute mode by idle line detection or
+              address mark detection
+         •    Autonomous functionality in Stop mode with wake-up from Stop capability
+
+
+3.48     Serial peripheral interfaces (SPI)
+         The devices embed three serial peripheral interfaces (SPI) that can be used to
+         communicate with external devices while using the specific synchronous protocol. The SPI
+         protocol supports half-duplex, full-duplex and simplex synchronous, serial communication
+         with external devices.
+         The interface can be configured as master or slave and can operate in multi-slave or
+         multi-master configurations. The device configured as master provides communication
+         clock (SCK) to the slave device. The slave select (SS) and ready (RDY) signals can be
+         applied optionally just to setup communication with concrete slave and to assure it handles
+         the data flow properly. The Motorola® data format is used by default, but some other specific
+         modes are supported as well.
+         The SPI main features are:
+         •    Full-duplex synchronous transfers on three lines
+         •    Half-duplex synchronous transfer on two lines (with bidirectional data line)
+         •    Simplex synchronous transfers on two lines (with unidirectional data line)
+         •    4-bit to 32-bit data size selection or fixed to 8-bit and 16-bit only
+         •    Multi master or multi slave mode capability
+         •    Dual-clock domain, separated clock for the peripheral kernel that can be independent
+              of PCLK
+         •    Baud rate prescaler up to kernel frequency/2 or bypass from RCC in Master mode
+         •    Protection of configuration and setting
+         •    Hardware or software management of SS for both master and slave
+         •    Adjustable minimum delays between data and between SS and data flow
+         •    Configurable SS signal polarity and timing, MISO x MOSI swap capability
+         •    Programmable clock polarity and phase
+         •    Programmable data order with MSB-first or LSB-first shifting
+         •    Programmable number of data within a transaction to control SS and CRC
+         •    Dedicated transmission and reception flags with interrupt capability
+
+
+                                             DS13633 Rev 3                                         89/385
+                                                                                                            95

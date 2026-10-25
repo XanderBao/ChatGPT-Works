@@ -1,0 +1,58 @@
+Functional overview                                                                               STM32U59xxx
+
+
+3.4.1           Flash memory protection
+                The option bytes allow the configuration of flexible protections:
+                •    write protection (WRP) to protect areas against erasing and programming. Two areas
+                     per bank can be selected with 8-Kbyte granularity.
+                •    RDP (readout protection) to protect the whole memory, has four levels of protection
+                     available (see Table 3 and Table 4):
+                     –    Level 0: no readout protection
+                     –    Level 0.5: available only when TrustZone is enabled
+                          All read/write operations (if no write protection is set) from/to the nonsecure flash
+                          memory are possible. The debug access to secure area is prohibited.
+                          Debug access to nonsecure area remains possible.
+                     –    Level 1: memory readout protection
+                          The flash memory cannot be read from or written to if either the debug features
+                          are connected or the boot in RAM or bootloader are selected. If TrustZone is
+                          enabled, the nonsecure debug is possible and the boot in SRAM is not possible.
+                          Regressions from Level 1 to lower levels can be protected by password
+                          authentication.
+                     –    Level 2: chip readout protection
+                          The debug features, the boot in RAM and the bootloader selection are disabled.
+                          A secure secret key can be configured in the secure options to allow the
+                          regression capability from Level 2 to Level 1. By default (key not configured), this
+                          Level 2 selection is irreversible and JTAG/SWD interfaces are disabled. If the
+                          secret key was previously configured in lower RDP levels, the device enables the
+                          RDP regression from Level 2 to Level 1 after password authentication through
+                          JTAG/SWD interface.
+Note:           In order to reach the best protection level, it is recommended to activate TrustZone and to
+                set the RDP Level 2 with password authentication regression enabled.
+
+         Table 3. Access status versus protection level and execution modes when TZEN = 0
+                                           User execution
+                         RDP                                             Debug/boot from RAM/ bootloader(1)
+         Area                         (boot from flash memory)
+                         level
+                                   Read         Write        Erase         Read          Write        Erase
+
+                          1         Yes          Yes           Yes           No           No           No(4)
+Flash main memory
+                          2         Yes          Yes           Yes          N/A           N/A          N/A
+
+                          1         Yes          No            No           Yes           No            No
+System memory (2)
+                          2         Yes          No            No           N/A           N/A          N/A
+
+                          1         Yes         Yes(4)         N/A          Yes          Yes(4)        N/A
+  Option bytes(3)
+                          2         Yes         No(5)          N/A          N/A           N/A          N/A
+
+                          1         Yes         Yes(6)         N/A          Yes          Yes(6)        N/A
+         OTP
+                          2         Yes         Yes(6)         N/A          N/A           N/A          N/A
+
+
+
+
+26/385                                           DS13633 Rev 3

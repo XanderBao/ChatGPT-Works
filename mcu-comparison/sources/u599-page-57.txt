@@ -1,0 +1,56 @@
+STM32U59xxx                                                                                Functional overview
+
+
+                                   Table 13.LPDMA1 channels implementation and usage
+                              Hardware parameters
+             Channel
+                                                                                   Features
+                x         dma_fifo_           dma_
+                           size[x]         addressing[x]
+
+                                                             Channel x (x = 0 to 3) is implemented with:
+                                                             – no FIFO. Only a single source transfer cell is
+         x = 0 to 3            0                0
+                                                               internally registered.
+                                                             – fixed/contiguously incremented addressing
+
+
+                   Table 14. LPDMA1 autonomous mode and wake-up in low-power modes
+                              Feature                                       Low-power modes
+
+         Autonomous mode and wake-up                       LPDMA1 in Sleep, Stop 0, Stop 1 and Stop 2 modes
+
+
+
+3.19     Neo-Chrom GPU (GPU2D)
+         The Neo-Chrom GPU is accelerating operations for graphic effects like rotation, scaling, and
+         perspective correct texture mapping (2.5D). It works together with an optimized software
+         stack designed for state of the art graphic rendering.
+         The GPU2D main features are:
+         •     Multi-threaded fragment (pixel) processing core with a VLIW (very-long instruction
+               word) instruction set
+         •     Fixed point functional units
+         •     Command list based DMAs to minimize CPU overhead
+         •     Two 32-bit AHB master interfaces for texture, command list and framebuffer access
+         •     32-bit AHB slave interface for register bank access
+         •     Up to 4 general-purpose flags for system-level synchronization
+         •     Texture decompression unit with TSC™4 and TSC™6/TSC™6a support
+         The GPU2D also features:
+         •     2D drawing
+               –       Pixel/line drawing
+               –       Filled rectangles
+               –       Triangles, quadrilateral drawing
+               –       Anti-aliasing 8xMSAA (multi-sample anti-aliasing)
+         •     Image transformations
+               –       3D perspective correct projections
+               –       Texture mapping with bilinear filtering or point sampling
+         •     Blit support
+               –       Rotation, mirroring, stretching (independently on x and y axis)
+               –       Source and/or destination color keying
+               –       Pixel format conversions
+
+
+
+
+                                               DS13633 Rev 3                                                    57/385
+                                                                                                                         95
